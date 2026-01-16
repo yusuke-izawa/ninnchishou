@@ -1,0 +1,20 @@
+{
+    "name": "ゆうの認知症ケア",
+    "short_name": "認知症ケア",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "background_color": "#f9f7f2",
+    "theme_color": "#f9f7f2",
+    "icons": [
+        {
+            "src": "icon.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

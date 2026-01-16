@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ゆうの認知症ケア</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+
+    <main id="app-container">
+        <!-- TOP PAGE -->
+        <section id="step-0" class="screen active">
+            <div class="content-wrapper centered">
+                <h1 class="app-title">ゆうの認知症ケア</h1>
+
+                <div class="intro-text">
+                    <p>僕もみんなと同じケアワーカーとして同じ悩みを持っています。<br>
+                        その解決の糸口を少しでもお手伝いできたら嬉しいです。</p>
+                </div>
+
+                <div class="flow-description">
+                    <p>①症状 → ②詳細 → ③背景 → ④薬・その他<br>
+                        の情報を元にケアのヒントを考えていきます。<br>
+                        <span class="small-note">※目安は3〜5分程度です</span>
+                    </p>
+                </div>
+
+                <button class="btn-primary start-btn" onclick="goToStep(1)">
+                    <span class="btn-icon">▶</span> はじめる
+                </button>
+
+                <div class="disclaimer">
+                    <p>※このアプリは正確な医学的診断を行うものではありません。<br>
+                        今目の前の対応を考えるための目安です。</p>
+                </div>
+
+                <div class="illustration-area">
+                    <!-- Placeholder for Coffee Illustration -->
+                    <div class="coffee-cup">☕</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STEP 1: Main Concern -->
+        <section id="step-1" class="screen">
+            <div class="content-wrapper">
+                <div class="step-header">
+                    <h2>今、何が一番気になる？</h2>
+                    <p class="sub-text">複数あっても大丈夫。<br>まずは「今いちばん気になること」をひとつ選んでください。</p>
+                </div>
+
+                <div class="options-list" id="step1-options">
+                    <!-- Options injected via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- STEP 2: Details -->
+        <section id="step-2" class="screen">
+            <div class="content-wrapper">
+                <div class="step-header">
+                    <h2>もう少し詳しく教えてください</h2>
+                    <p class="sub-text">あてはまるものを<br>いくつ選んでも大丈夫です。<br>迷ったら、近いものを選んでください。</p>
+                </div>
+
+                <div class="selected-context-display" id="step1-context"></div>
+
+                <div class="options-list multiple" id="step2-options">
+                    <!-- Options injected via JS -->
+                </div>
+
+                <div class="nav-buttons">
+                    <button class="btn-next" onclick="goToStep(3)">▶ 次へ進む</button>
+                    <button class="btn-back" onclick="goToStep(1)">戻る</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- STEP 3: Context -->
+        <section id="step-3" class="screen">
+            <div class="content-wrapper">
+                <div class="step-header">
+                    <h2>気になっている行動の前後で思い当たることはありますか？</h2>
+                    <p class="sub-text">思い当たるものを<br>いくつ選んでも大丈夫です。<br>思い当たらなかったらそのままで！</p>
+                </div>
+
+                <div class="tags-group">
+                    <h3>環境・タイミング</h3>
+                    <div class="tags-container" id="step3-tags-env"></div>
+                </div>
+
+                <div class="tags-group">
+                    <h3>身体・生活</h3>
+                    <div class="tags-container" id="step3-tags-body"></div>
+                </div>
+
+                <div class="tags-group">
+                    <h3>関わり方</h3>
+                    <div class="tags-container" id="step3-tags-care"></div>
+                </div>
+
+                <div class="nav-buttons">
+                    <button class="btn-next" onclick="goToStep(4)">▶ 次へ進む</button>
+                    <button class="btn-back" onclick="goToStep(2)">戻る</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- STEP 4: Meds & Free Input -->
+        <section id="step-4" class="screen">
+            <div class="content-wrapper">
+                <div class="step-header">
+                    <h2>お薬の影響も一緒に考えてみましょう！</h2>
+                    <p class="sub-text">このあと入力された服薬内容をもとに薬剤の影響を使って推測します。</p>
+                </div>
+
+                <div class="input-group">
+                    <label>お薬内容</label>
+                    <textarea id="medication-input" placeholder="例：ドネペジル、エチゾラム"></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label>その他気になること</label>
+                    <textarea id="free-input"
+                        placeholder="例：急に階段を登り返している。週末に家族が出てしまっている。ここ1ヶ月で急に同じことを繰り返すようになった等"></textarea>
+                </div>
+
+                <div class="nav-buttons">
+                    <button class="btn-next" onclick="generateResult()">▶ 次へ進む</button>
+                    <button class="btn-back" onclick="goToStep(3)">戻る</button>
+                </div>
+
+                <div class="disclaimer-small">
+                    <p>※本アプリは診断を行うものではありません。<br>※最終的な判断は医師・看護師にご相談ください。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESULT -->
+        <section id="result-screen" class="screen">
+            <div class="content-wrapper result-content">
+                <div class="result-header">
+                    <h2>いま、現場でできること</h2>
+                    <p class="result-intro">おつかれさまでした。<br>人と真剣に向き合うって<br>ほんとに難しいことですよね。</p>
+                </div>
+
+                <div class="result-card" id="care-priority">
+                    <h3>まず大切にしたい視点</h3>
+                    <div class="card-content" id="result-priority-content">
+                        <!-- Generated Content -->
+                    </div>
+                </div>
+
+                <div class="result-card" id="specific-hints">
+                    <h3>具体的なケアのヒント</h3>
+                    <div class="card-content" id="result-hints-content">
+                        <!-- Generated Content -->
+                    </div>
+                </div>
+
+                <div class="result-card" id="medical-perspective">
+                    <h3>薬剤的判断</h3>
+                    <div class="card-content" id="result-meds-content">
+                        <!-- Generated Content -->
+                    </div>
+                </div>
+
+                <div class="result-card" id="dementia-type">
+                    <h3>考えられる認知症のタイプ</h3>
+                    <div class="card-content" id="result-type-content">
+                        <!-- Generated Content -->
+                    </div>
+                </div>
+
+                <div class="message-card">
+                    <h3>僕からひとこと</h3>
+                    <p id="result-message-content">「分かってても時間がなかったり、焦っちゃってできない時ってあるよね💦<br>それでもここまで考えてるのって、ちゃんとケアだと思うよ！」
+                    </p>
+                </div>
+
+                <div class="footer-msg">
+                    <p>最後までお付き合い頂きありがとうございました。<br>あなたの明日がちょっと笑顔でありますように！</p>
+                </div>
+
+                <button class="btn-back-home" onclick="location.reload()">最初に戻る</button>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
+</body>
+
+</html>
